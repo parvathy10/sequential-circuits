@@ -1,22 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Module: D_flipflop.v
-// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
-//
-// Description: 
-// This is a D flip-flop designed with asynchronous reset. 
-// Input data is D and outputs are q and qbar. The system takes D as input and updates the value of q and qb at every clock edge.
-// This is a sample design that is intended to make the reader understand the importance of properly writing a verilog file by 
-// following standard coding guidelines. 
-// Ensure that all files have proper headers, sufficient and neccessary comments. 
-// Correct indentation should be there at all levels for better readability.
-// These are industry standard practices and all students are expected to follow this in all their programs.
 
-// Change history: 23/11/18 - V1.0 Initial working version created  (owner: Karthi Balasubramanian)
-//                 24/11/18 - V1.1 modified the design to include qbar also (owner: Karthi Balasubramanian)
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-/* 
 Module Definition:
 Each module should be defined in a separate file. Don't have multiple modules in a file
 The name of the module should be exactly same as the name of the file eg: D_flipflop.v contains module 'D_flipflop'.
@@ -27,7 +10,7 @@ Please note that multi-line Comments should be given as block comments using '*'
 /* 
 Follow verilog 2001 ANSI-C style port definitions (Name and port types are combined).
 Declare inputs and outputs one per line.
-*/
+*//
 module D_flipflop (
       input clk, 
       input reset,
@@ -68,14 +51,5 @@ assign qbar = ~q_i;    // Complemented output
 
 assign q = q_i;     // assign the output q to its placeholder internal signal
 
-//                    TO DO         
-// Design a D flipflop with synchronous reset
-// Design a T flipflop with asynchronous reset
-
-// //////////////////////////  Knowledge of the Day//////////////////////////////////////////////////
-// Synchronous resets are very rarely used in designs. 99.99% of the designs use asynchronous reset only
-// In your actual designs, always use asynchronous resets only.
-///////////////////////////////////////////////////////////////////////////////////////////////////
-  
 endmodule
 
