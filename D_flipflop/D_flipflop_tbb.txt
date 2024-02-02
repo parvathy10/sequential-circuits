@@ -19,6 +19,7 @@ module D_flipflop_tb;
 
 // Define testbench internal signals 
 // It is advised to give same names as the signals in the main module
+// testbench
 reg clk;
 reg reset;
 reg d;
