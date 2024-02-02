@@ -1,0 +1,86 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Module: D_flipflop_tb.v
+// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
+//
+// Description: 
+// This is a test bench of D flip-flop module designed with asynchronous reset.
+// This testbench is intended to guide the reader to quickly force a few values and display the output.
+// It is preferable to write testbenches in system verilog since it offers more flexibility. 
+// Nowadays all compilers allow system verilog testbenches.
+// The testbench should be named as 'OriginalModulename_tb.sv or tb_OriginalModulename.sv'  
+// These are industry standard practices and all students are expected to follow this in all their programs.
+
+// Change history: 23/11/18 - V1.0 Initial working version created  (owner: Karthi Balasubramanian)
+//                 24/11/18 - V1.1 modified to add stop and finish timing(owner: Karthi Balasubramanian)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Testbench (should always be an empty module description)
+module D_flipflop_tb;
+
+// Define testbench internal signals 
+// It is advised to give same names as the signals in the main module
+reg clk;
+reg reset;
+reg d;
+wire q;
+wire qbar;
+  
+
+//Instantiate the design under test
+
+/*
+Always use the dot form to instantiate by names.
+DONOT instantiate modules by positional argument.
+The following SHOULD NOT BE DONE. 
+This type of positional assignment is the worst type of coding you can ever do.
+    DFF D_flipflop(clk, reset, d, q, reset)
+*/ 
+
+/*
+Correct way of instantiating by names.
+Use one signal per line, preferably in the same order as in the module (similar to how the signals in module were definec
+*/
+
+D_flipflop D_flipflop_test(
+  .clk(clk), 
+  .reset(reset),
+  .d(d),
+  .q(q), 
+  .qbar(qbar)
+);
+  
+// Generate the test vectors
+        
+initial 
+begin
+  clk = 0;
+  d = 1'bx;
+  
+  $display("Reset flop.");   
+  reset = 1;
+  show_values;        // Call a task (show_values) to wait for 1ns and display the input and outputs
+    
+  $display("Release reset.");
+  d = 1;
+  reset = 0;
+  show_values;
+  
+  #7 d = 0;
+  #13 d=1;
+  #30 d = 1;
+  
+  $stop;
+  $finish;
+end
+  
+// 'Task' to display the current input and output values
+// Note that 'function' can't be used since delay is being used
+task show_values;
+  #1 $display("d:%0h, q:%0h, qb:%0h", d, q, qbar);
+endtask
+
+always
+  #5ns clk = ~clk;   // generate clock of 10 ns time period
+
+
+endmodule

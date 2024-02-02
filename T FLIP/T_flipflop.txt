@@ -1,0 +1,16 @@
+module T_flipflop (
+    input t,    // Toggle input
+    input clk,  // Clock input
+    output reg q,  // Q output
+    output reg qbar  // Q-bar (complemented output)
+);
+
+always @(posedge clk)
+begin
+    if (t)
+        q <= ~q;  // Toggle Q when 't' is asserted
+end
+
+assign qbar = ~q;  // Q-bar is the complement of Q
+
+endmodule

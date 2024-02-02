@@ -1,0 +1,66 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Module: SR_flipflop_tb.sv
+// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
+//
+// Description:
+// This is a test bench of the SR (Set-Reset) flip-flop module.
+// This testbench is intended to guide the reader to quickly force a few values and display the output.
+// It is written in SystemVerilog for added flexibility.
+// The testbench should be named as 'OriginalModulename_tb.sv or tb_OriginalModulename.sv'
+// These are industry standard practices, and all students are expected to follow them in all their programs.
+
+// Change history: 23/11/18 - V1.0 Initial working version created (owner: Karthi Balasubramanian)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+`timescale 1ns/1ps  // Specify simulation timescale
+
+// Testbench (should always be an empty module description)
+module SR_flipflop_tb;
+
+// Define testbench internal signals
+// It is advised to give the same names as the signals in the main module
+reg s;
+reg r;
+reg clk;
+wire q;
+wire qbar;
+
+// Instantiate the design under test
+SR_flipflop SR_flipflop_test (
+    .s(s),
+    .r(r),
+    .clk(clk),
+    .q(q),
+    .qbar(qbar)
+);
+
+// Generate the test vectors
+initial
+begin
+    clk = 0;
+    s = 1;
+    r = 1;
+
+    $display("Set flip-flop.");
+    s = 1;
+    show_values; // Call a task (show_values) to wait for 1ns and display the input and outputs
+
+    $display("Reset flip-flop.");
+    r = 1;
+    show_values;
+
+    #5 s = 0;
+    #10 r = 0;
+
+    $stop;
+    $finish;
+end
+
+// 'Task' to display the current input and output values
+task show_values;
+    #1 $display("s:%0h, r:%0h, q:%0h, qb:%0h", s, r, q, qbar);
+endtask
+
+always #5ns clk = ~clk; // generate clock of 10 ns time period
+
+endmodule

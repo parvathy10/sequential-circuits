@@ -1,0 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Module: SR_flipflop.v
+// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
+//
+// Description:
+// This is an SR (Set-Reset) flip-flop module designed with asynchronous set and reset inputs.
+// Inputs include set (s), reset (r), and clock (clk).
+// Outputs are q and qbar. The system updates the flip-flop state based on the set and reset inputs.
+// This is a sample design that follows standard coding guidelines.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+module SR_flipflop (
+    input s,
+    input r,
+    input clk,
+    output reg q,
+    output reg qbar
+);
+
+// Main module description
+// Flip-flop state being updated with asynchronous set and reset inputs
+// Note the proper indentation levels.
+always @(posedge clk)
+begin
+    if (s)
+        q <= 1;
+    else if (r)
+        q <= 0;
+end
+
+assign qbar = ~q; // Complemented output
+
+endmodule

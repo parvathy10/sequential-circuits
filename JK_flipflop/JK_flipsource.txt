@@ -1,0 +1,43 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Module: JK_flipflop.v
+// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
+// Description:
+// This is a JK flip-flop designed with asynchronous reset.
+// Input data includes J, K, clock (clk), and reset.
+// Outputs are q and qbar. The system takes J, K as inputs and updates the value of q and qbar at every clock edge.
+
+
+module JK_flipflop (
+    input clk,
+    input reset,
+    input j,
+    input k,
+    output reg q,
+    output reg qbar
+);
+
+// Signal Definitions
+reg q_i; // Internal signal for output port q
+
+// Main module description
+// Output being assigned at rising edge with asynchronous reset ability
+// Note the proper indentation levels.
+always @(posedge clk or posedge reset)
+begin
+    // Asynchronous reset when reset goes high else apply JK flip-flop logic on positive clock edge
+    if (reset)
+        q_i <= 1'b0;
+    else
+        case ({j, k})
+            2'b00: q_i <= q_i; // No change
+            2'b01: q_i <= 1'b0; // Reset condition
+            2'b10: q_i <= 1'b1; // Set condition
+            2'b11: q_i <= ~q_i; // Toggle condition
+        endcase
+end
+
+assign qbar = ~q_i; // Complemented output
+
+assign q = q_i; // assign the output q to its placeholder internal signal
+
+endmodule
