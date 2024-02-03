@@ -1,16 +1,5 @@
 // Module: D_flipflop.v
 
-Module Definition:
-Each module should be defined in a separate file. Don't have multiple modules in a file
-The name of the module should be exactly same as the name of the file eg: D_flipflop.v contains module 'D_flipflop'.
-Neccessary and sufficient comments should be made at every possible location in the design.
-Please note that multi-line Comments should be given as block comments using '*' and '/' instead of commenting each line by '//'
-*/
-
-/* 
-Follow verilog 2001 ANSI-C style port definitions (Name and port types are combined).
-Declare inputs and outputs one per line.
-*//
 module D_flipflop (
       input clk, 
       input reset,
@@ -18,19 +7,7 @@ module D_flipflop (
       output q,
       output qbar
 );
-  
-/*
-First level of indentation should start from the extreme left.
-Define your required signals (type 'reg' for signals requiring storage and 'wire' for others)
-
-A special class of internal signals are those that will be manipulated within the program and later directly assigned to an output port.
-In this example, we  need one such signal for the output port 'q'. 
-This internal signal is needed since q_out value needs to be forced with a default value ('0) when reset. 
-It is not recommended to force output ports directly (some compilers will show error and some will accept). Hence an intermediary signal is used
-Note that all internal signals that are used as only placeholders for assigning to output ports are named with a subscript '_i' 
-*/
-
-// Signal Definitions 
+  // Signal Definitions 
 
 reg q_i;  // This is the special internal signal for output port q
 

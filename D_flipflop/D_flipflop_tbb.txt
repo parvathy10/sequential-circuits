@@ -1,18 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Module: D_flipflop_tb.v
-// Project: MTech-VLSI-Verilog-SystemVerilog-Practice-Problems
-//
-// Description: 
-// This is a test bench of D flip-flop module designed with asynchronous reset.
-// This testbench is intended to guide the reader to quickly force a few values and display the output.
-// It is preferable to write testbenches in system verilog since it offers more flexibility. 
-// Nowadays all compilers allow system verilog testbenches.
-// The testbench should be named as 'OriginalModulename_tb.sv or tb_OriginalModulename.sv'  
-// These are industry standard practices and all students are expected to follow this in all their programs.
 
-// Change history: 23/11/18 - V1.0 Initial working version created  (owner: Karthi Balasubramanian)
-//                 24/11/18 - V1.1 modified to add stop and finish timing(owner: Karthi Balasubramanian)
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Testbench (should always be an empty module description)
 module D_flipflop_tb;
@@ -28,19 +16,7 @@ wire qbar;
   
 
 //Instantiate the design under test
-
-/*
-Always use the dot form to instantiate by names.
-DONOT instantiate modules by positional argument.
-The following SHOULD NOT BE DONE. 
-This type of positional assignment is the worst type of coding you can ever do.
-    DFF D_flipflop(clk, reset, d, q, reset)
-*/ 
-
-/*
-Correct way of instantiating by names.
-Use one signal per line, preferably in the same order as in the module (similar to how the signals in module were definec
-*/
+ DFF D_flipflop(clk, reset, d, q, reset)
 
 D_flipflop D_flipflop_test(
   .clk(clk), 
