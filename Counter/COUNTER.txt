@@ -1,0 +1,61 @@
+//Counter thats counts to a max value and reset backs to zero 
+
+module counter ( 
+input clk;
+input rst;
+output reg[7:0] count;
+);
+
+parameter MAX_VALUE=8'b11111111;
+
+always@(posedge clk or negedge rst)
+begin
+if(!rst)
+count<=0'd0;
+end
+else begin
+if(count== MAX_VALUE)
+count<=0;
+end
+else begin
+count <=count+1;
+end
+end module
+
+
+`timescale 1ns/1ps
+
+module testbench;
+
+  reg clk;
+  reg rst;
+  wire [7:0] count;
+
+  // Instantiate the counter module
+  counter uut (
+    .clk(clk),
+    .rst(rst),
+    .count(count)
+  );
+
+  // Clock generation
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk; // Toggle the clock every 5 time units
+  end
+
+  // Initializations
+  initial begin
+    rst = 1; // Assert reset initially
+    #10;    // Wait for a few clock cycles
+    rst = 0; // Deassert reset
+    #100;   // Run simulation for 100 time units
+    $finish; // Finish simulation
+  end
+
+  // Display counter value
+  always @(posedge clk) begin
+    $display("Time: %0t, Counter: %h", $time, count);
+  end
+
+endmodule
